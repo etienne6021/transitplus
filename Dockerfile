@@ -37,4 +37,9 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
+# Fix Git ownership issue and permissions
+RUN git config --system --add safe.directory /var/www
+
+# Switch to root to ensure we can fix any initial mount permissions if needed
+# but we'll stay as btrans for the app execution
 USER $user

@@ -25,7 +25,12 @@ fi
 echo "🏗️  Building and launching Docker containers (Cloud Mode)..."
 docker-compose -f docker-compose.cloud.yml up -d --build
 
-# 4. Install Dependencies
+# 4. Fix Permissions (Crucial for VPS)
+echo "🔒 Fixing directory permissions..."
+docker exec -u root btrans-app chown -R btrans:www-data /var/www
+docker exec -u root btrans-app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# 5. Install Dependencies
 echo "📦 Installing Composer dependencies..."
 docker exec btrans-app composer install --no-dev --optimize-autoloader
 

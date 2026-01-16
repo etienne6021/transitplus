@@ -22,7 +22,12 @@ fi
 echo "🏗️  Construction des images Docker..."
 docker-compose up -d --build
 
-# 4. Installation des dépendances et Setup Laravel
+# 4. Fix Permissions
+echo "🔒 Fixation des permissions..."
+docker-compose exec -u root app chown -R btrans:www-data /var/www
+docker-compose exec -u root app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# 5. Installation des dépendances et Setup Laravel
 echo "📦 Installation des dépendances Composer..."
 docker-compose exec app composer install --no-dev --optimize-autoloader
 
