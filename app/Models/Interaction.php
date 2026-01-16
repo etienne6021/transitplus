@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\BelongsToAgency;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\BelongsToAgency;
+use App\Traits\LogsActivityTrait;
 
 class Interaction extends Model
 {
-    use BelongsToAgency;
+    use BelongsToAgency, LogsActivityTrait;
 
     protected $guarded = [];
 

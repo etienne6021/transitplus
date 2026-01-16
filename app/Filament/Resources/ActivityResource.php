@@ -29,24 +29,47 @@ class ActivityResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Grid::make(3)
+                Forms\Components\Section::make('Détails de l\'action')
                     ->schema([
-                        Forms\Components\TextInput::make('causer.name')
-                            ->label('Auteur')
-                            ->disabled(),
-                        Forms\Components\TextInput::make('description')
-                            ->label('Action')
-                            ->disabled(),
-                        Forms\Components\TextInput::make('subject_type')
-                            ->label('Module')
-                            ->disabled(),
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\Placeholder::make('causer_name')
+                                    ->label('Auteur')
+                                    ->content(fn ($record) => $record->causer?->name ?? 'Système / Automatique'),
+                                Forms\Components\Placeholder::make('created_at')
+                                    ->label('Date & Heure')
+                                    ->content(fn ($record) => $record->created_at->format('d/m/Y H:i:s')),
+                                Forms\Components\Placeholder::make('description')
+                                    ->label('Type d\'action')
+                                    ->content(fn ($record) => match($record->description) {
+                                        'created' => '🆕 Création',
+                                        'updated' => '📝 Modification',
+                                        'deleted' => '🗑️ Suppression',
+                                        default => $record->description,
+                                    }),
+                                Forms\Components\Placeholder::make('subject')
+                                    ->label('Élément concerné')
+                                    ->content(fn ($record) => (str_replace('App\\Models\\', '', $record->subject_type)) . ' (ID: ' . $record->subject_id . ')'),
+                            ]),
                     ]),
-                Forms\Components\KeyValue::make('properties.attributes')
-                    ->label('Nouvelles Valeurs')
-                    ->disabled(),
-                Forms\Components\KeyValue::make('properties.old')
-                    ->label('Anciennes Valeurs')
-                    ->disabled(),
+                
+                Forms\Components\Section::make('Modifications')
+                    ->description('Comparaison des valeurs avant et après l\'action.')
+                    ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\KeyValue::make('properties.old')
+                                    ->label('Anciennes Valeurs')
+                                    ->keyLabel('Champ')
+                                    ->valueLabel('Valeur')
+                                    ->columnSpan(1),
+                                Forms\Components\KeyValue::make('properties.attributes')
+                                    ->label('Nouvelles Valeurs')
+                                    ->keyLabel('Champ')
+                                    ->valueLabel('Valeur')
+                                    ->columnSpan(1),
+                            ]),
+                    ])->visible(fn ($record) => !empty($record->properties->all())),
             ]);
     }
 
@@ -60,6 +83,7 @@ class ActivityResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('causer.name')
                     ->label('Utilisateur')
+                    ->default('Système')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Action')

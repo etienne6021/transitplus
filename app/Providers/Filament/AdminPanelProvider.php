@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->profile()
+            ->passwordReset()
             ->colors([
                 'primary' => [
                     50 => '#f0f9ff',
@@ -35,15 +37,16 @@ class AdminPanelProvider extends PanelProvider
                     200 => '#bae6fd',
                     300 => '#7dd3fc',
                     400 => '#38bdf8',
-                    500 => '#0ea5e9',
-                    600 => '#0284c7',
-                    700 => '#0369a1',
-                    800 => '#075985',
-                    900 => '#0c4a6e', // Sea Blue
-                    950 => '#082f49',
+                    500 => '#F37335', // Orange Landing
+                    600 => '#e66a2e',
+                    700 => '#cc5e29',
+                    800 => '#b35224',
+                    900 => '#99461f',
+                    950 => '#051923', // Deep Blue Landing
                 ],
                 'warning' => Color::Orange,
                 'success' => Color::Teal,
+                'gray' => Color::Slate,
             ])
             ->font('Outfit', url: 'https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap')
             ->brandLogo(asset('images/logo.png'))

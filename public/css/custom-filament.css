@@ -1,74 +1,103 @@
-/* Soft background for the whole panel */
+/* 
+   TRANSIT PLUS - IMMERSIVE DESIGN SYSTEM 
+   Aligné sur la palette de la landing page (#051923, #F37335)
+*/
+
+/* 1. Arrière-plan immersif pour tout le panel (Mode Clair) */
 .fi-layout {
-    background: radial-gradient(circle at top left, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%) !important;
+    background: radial-gradient(circle at top right, #f8fafc 0%, #eef2ff 30%, #e0f2fe 100%) !important;
+    min-height: 100vh;
 }
 
-/* Glassmorphism for cards */
-.fi-section,
-.fi-card {
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    border-radius: 1.25rem !important;
-    box-shadow: 0 8px 32px 0 rgba(7, 89, 133, 0.05) !important;
-}
-
-/* Sidebar styling */
+/* 2. Sidebar Premium (Couleur Landing Page) */
 .fi-sidebar {
-    background: #0c4a6e !important;
-    /* Sea blue 900 */
-    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: #051923 !important;
+    /* Bleu profond de la landing */
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Sidebar items */
 .fi-sidebar-item-button {
-    border-radius: 0.75rem !important;
-    margin: 0.25rem 0.5rem !important;
+    border-radius: 12px !important;
+    margin: 4px 12px !important;
+    transition: all 0.2s ease !important;
 }
 
 .fi-sidebar-item-active .fi-sidebar-item-button {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-left: 4px solid #f37335 !important;
-    /* Orange accent */
+    background: rgba(243, 115, 53, 0.15) !important;
+    /* Orange translucide */
+    color: #F37335 !important;
+    border-left: 3px solid #F37335 !important;
 }
 
-/* Logo styling */
-.fi-logo {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+.fi-sidebar-group-label {
+    color: #F37335 !important;
+    opacity: 0.8;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    font-size: 0.65rem !important;
+    font-weight: 900 !important;
+    margin-top: 1.5rem !important;
 }
 
-/* Topbar glass */
+/* 3. Section & Cards (Glassmorphism Coloré) */
+.fi-section,
+.fi-ta-ctn,
+.fi-card {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 25px -5px rgba(5, 25, 35, 0.05), 0 8px 10px -6px rgba(5, 25, 35, 0.05) !important;
+    overflow: hidden !important;
+}
+
+/* 4. Topbar (Immersive Glass) */
 .fi-topbar {
-    background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(8px) !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Primary buttons with a slight gradient */
+/* 5. Inputs & Forms */
+.fi-fo-text-input,
+.fi-fo-select {
+    border-radius: 10px !important;
+    border-color: rgba(5, 25, 35, 0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+.fi-fo-text-input:focus-within,
+.fi-fo-select:focus-within {
+    border-color: #F37335 !important;
+    box-shadow: 0 0 0 2px rgba(243, 115, 53, 0.2) !important;
+}
+
+/* 6. Buttons Primary */
 .fi-btn-color-primary {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0c4a6e 100%) !important;
-    transition: all 0.3s ease !important;
+    background: #F37335 !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(243, 115, 53, 0.2) !important;
 }
 
 .fi-btn-color-primary:hover {
+    background: #e66a2e !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(12, 74, 110, 0.3) !important;
 }
 
-/* Sidebar Group Labels */
-.fi-sidebar-group-label {
-    color: #f37335 !important;
+/* 7. Stats Widgets */
+.fi-wi-stats-overview-stat {
+    border-radius: 20px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 249, 255, 0.9) 100%) !important;
+}
+
+/* 8. Table Header */
+.fi-ta-header-cell {
+    background: rgba(5, 25, 35, 0.02) !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
     font-size: 0.7rem !important;
+    letter-spacing: 0.05em !important;
     font-weight: 800 !important;
-    margin-top: 1.5rem !important;
-    padding-left: 1rem !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding-bottom: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-}
-
-.fi-sidebar-group {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    padding-bottom: 1rem !important;
 }

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\BelongsToAgency;
 use App\Traits\LogsActivityTrait;
 
 class Leave extends Model
 {
-    use LogsActivityTrait;
+    use BelongsToAgency, LogsActivityTrait;
     protected $guarded = [];
 
     protected $casts = [

@@ -34,7 +34,7 @@ docker-compose exec app php artisan storage:link
 
 echo "🗄️  Exécution des migrations et seeders..."
 docker-compose exec app php artisan migrate --force
-docker-compose exec app php artisan db:seed --class=RolesAndPermissionsSeeder --force
+docker-compose exec app php artisan db:seed --force
 
 echo "🧹 Nettoyage du cache..."
 docker-compose exec app php artisan config:cache
