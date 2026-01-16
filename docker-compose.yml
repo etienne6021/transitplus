@@ -1,0 +1,54 @@
+services:
+  # PHP Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        user: btrans
+        uid: 1000
+    image: btrans-app
+    container_name: btrans-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - btrans-network
+
+  # Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: btrans-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - btrans-network
+
+  # MySQL Service
+  db:
+    image: mysql:8.0
+    container_name: btrans-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - "33061:3306"
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      - btrans-network
+
+networks:
+  btrans-network:
+    driver: bridge

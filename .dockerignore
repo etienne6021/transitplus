@@ -1,0 +1,16 @@
+node_modules
+vendor
+.git
+.env
+storage/*.key
+public/storage
+docker
+tests
+phpunit.xml
+.phpunit.result.cache
+.env.testing
+auth.json
+npm-debug.log
+yarn-error.log
+.idea
+.vscode

@@ -1,0 +1,74 @@
+/* Soft background for the whole panel */
+.fi-layout {
+    background: radial-gradient(circle at top left, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%) !important;
+}
+
+/* Glassmorphism for cards */
+.fi-section,
+.fi-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 1.25rem !important;
+    box-shadow: 0 8px 32px 0 rgba(7, 89, 133, 0.05) !important;
+}
+
+/* Sidebar styling */
+.fi-sidebar {
+    background: #0c4a6e !important;
+    /* Sea blue 900 */
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.fi-sidebar-item-button {
+    border-radius: 0.75rem !important;
+    margin: 0.25rem 0.5rem !important;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-left: 4px solid #f37335 !important;
+    /* Orange accent */
+}
+
+/* Logo styling */
+.fi-logo {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Topbar glass */
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Primary buttons with a slight gradient */
+.fi-btn-color-primary {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0c4a6e 100%) !important;
+    transition: all 0.3s ease !important;
+}
+
+.fi-btn-color-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(12, 74, 110, 0.3) !important;
+}
+
+/* Sidebar Group Labels */
+.fi-sidebar-group-label {
+    color: #f37335 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    font-size: 0.7rem !important;
+    font-weight: 800 !important;
+    margin-top: 1.5rem !important;
+    padding-left: 1rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.fi-sidebar-group {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding-bottom: 1rem !important;
+}
