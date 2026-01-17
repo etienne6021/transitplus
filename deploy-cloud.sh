@@ -34,7 +34,15 @@ docker exec -u root btrans-app chmod -R 775 /var/www/storage /var/www/bootstrap/
 echo "📦 Installing Composer dependencies..."
 docker exec btrans-app composer install --no-dev --optimize-autoloader
 
-# 5. Laravel Setup
+# 5. Wait for Database
+echo "⏳ Waiting for database to be ready..."
+until docker exec btrans-db mysqladmin ping -h localhost --silent; do
+    echo "   ...waiting for MySQL..."
+    sleep 2
+done
+echo "✅ Database is UP!"
+
+# 6. Laravel Setup
 echo "⚙️  Running Laravel optimizations..."
 docker exec btrans-app php artisan key:generate --force
 docker exec btrans-app php artisan storage:link
