@@ -42,7 +42,11 @@ until docker exec btrans-db mysqladmin ping -h localhost --silent; do
 done
 echo "✅ Database is UP!"
 
-# 6. Laravel Setup
+# 6. Force User Permissions (Fix for Host Not Allowed)
+echo "🔑 Restoring database permissions..."
+docker exec btrans-db mysql -u root -p$(grep DB_PASSWORD .env | cut -d '=' -f2) -e "ALTER USER 'btrans'@'%' IDENTIFIED WITH mysql_native_password BY '$(grep DB_PASSWORD .env | cut -d '=' -f2)'; GRANT ALL PRIVILEGES ON btrans.* TO 'btrans'@'%'; FLUSH PRIVILEGES;"
+
+# 7. Laravel Setup
 echo "⚙️  Running Laravel optimizations..."
 docker exec btrans-app php artisan key:generate --force
 docker exec btrans-app php artisan storage:link

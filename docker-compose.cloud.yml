@@ -35,7 +35,7 @@ services:
     image: mysql:8.0
     container_name: btrans-db
     restart: unless-stopped
-    command: --innodb-use-native-aio=0
+    command: --innodb-use-native-aio=0 --skip-name-resolve
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
