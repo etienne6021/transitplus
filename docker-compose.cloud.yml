@@ -17,12 +17,11 @@ services:
     networks:
       - btrans-network
 
-  # Nginx Service (Talks to PHP-FPM and is exposed to NPM)
+  # Nginx Service
   nginx:
     image: nginx:alpine
     container_name: btrans-nginx
     restart: unless-stopped
-    # No ports exposed to host, NPM will use the proxy_net network
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
@@ -30,18 +29,17 @@ services:
       - btrans-network
       - proxy_net
 
-  # MySQL Service
+  # MariaDB Service (Plus stable sur VPS Cloud que MySQL 8)
   db:
-    image: mysql:8.0
+    image: mariadb:10.11
     container_name: btrans-db
     restart: unless-stopped
-    command: --innodb-use-native-aio=0 --skip-name-resolve
+    command: --innodb-use-native-aio=0 --innodb-flush-method=O_DSYNC --skip-name-resolve
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_ROOT_HOST: '%'
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./docker/mysql:/var/lib/mysql
     networks:
