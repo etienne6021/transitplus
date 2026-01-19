@@ -23,27 +23,24 @@ services:
     container_name: btrans-nginx
     restart: unless-stopped
     ports:
-      - "8000:80"
+      - "80:80"
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - btrans-network
 
-  # MySQL Service
+  # MariaDB Service (Stable & Robust)
   db:
-    image: mysql:8.0
+    image: mariadb:10.11
     container_name: btrans-db
     restart: unless-stopped
+    command: --innodb-use-native-aio=0 --innodb-flush-method=O_DSYNC --skip-name-resolve
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    ports:
-      - "33061:3306"
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./docker/mysql:/var/lib/mysql
     networks:

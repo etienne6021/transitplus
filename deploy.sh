@@ -1,50 +1,49 @@
 #!/bin/bash
 
-# Script de déploiement automatisé pour Transit Plus (Ubuntu)
-# Usage: ./deploy.sh
+# TRANSIT PLUS - ROBUST DEPLOYMENT SCRIPT (UBUNTU LOCAL/SSH)
+echo "🚀 Démarrage du déploiement Transit Plus..."
 
-echo "🚀 Démarrage du déploiement de Transit Plus..."
-
-# 1. Vérification de Docker
-if ! [ -x "$(command -v docker-compose)" ]; then
-  echo "❌ Erreur: docker-compose n'est pas installé." >&2
-  exit 1
-fi
-
-# 2. Copie du .env si inexistant
+# 1. Copie du .env si absent
 if [ ! -f .env ]; then
-    echo "📄 Création du fichier .env à partir de l'exemple..."
+    echo "📄 Création du fichier .env..."
     cp .env.example .env
-    echo "⚠️  N'OUBLIEZ PAS DE CONFIGURER VOTRE .ENV (DB_HOST=db, etc.)"
+    echo "⚠️  Configurez votre .env avant de continuer si nécessaire."
 fi
 
-# 3. Build et Lancement des conteneurs
-echo "🏗️  Construction des images Docker..."
+# 2. Nettoyage et Lancement
+echo "🏗️  Construction et lancement des conteneurs..."
+docker-compose down
+# Optionnel: sudo rm -rf docker/mysql # À décommenter si vous voulez un reset total
 docker-compose up -d --build
 
-# 4. Fix Permissions
-echo "🔒 Fixation des permissions..."
-docker-compose exec -u root app chown -R btrans:www-data /var/www
-docker-compose exec -u root app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# 3. Réglage des permissions (Crucial)
+echo "🔒 Fixation des permissions des dossiers..."
+docker exec -u root btrans-app chown -R btrans:www-data /var/www
+docker exec -u root btrans-app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# 5. Installation des dépendances et Setup Laravel
-echo "📦 Installation des dépendances Composer..."
-docker-compose exec app composer install --no-dev --optimize-autoloader
+# 4. Attente de la base de données
+echo "⏳ Attente que la base de données soit prête..."
+until docker exec btrans-db mariadb-admin ping --silent; do
+    echo "   ...en attente de MariaDB..."
+    sleep 3
+done
+echo "✅ Base de données opérationnelle !"
 
-echo "🔑 Génération de la clé d'application..."
-docker-compose exec app php artisan key:generate --force
+# 5. Installation et Setup Laravel
+echo "📦 Installation des dépendances et setup..."
+docker exec btrans-app composer install --no-dev --optimize-autoloader
+docker exec btrans-app php artisan key:generate --force
+docker exec btrans-app php artisan storage:link
+docker exec btrans-app php artisan migrate:fresh --force
+docker exec btrans-app php artisan db:seed --force
 
-echo "📂 Création du lien symbolique de stockage..."
-docker-compose exec app php artisan storage:link
+# 6. Optimisations finales
+echo "⚡ Nettoyage et mise en cache..."
+docker exec btrans-app php artisan config:cache
+docker exec btrans-app php artisan route:cache
+docker exec btrans-app php artisan view:cache
 
-echo "🗄️  Exécution des migrations et seeders..."
-docker-compose exec app php artisan migrate --force
-docker-compose exec app php artisan db:seed --force
-
-echo "🧹 Nettoyage du cache..."
-docker-compose exec app php artisan config:cache
-docker-compose exec app php artisan route:cache
-docker-compose exec app php artisan view:cache
-
-echo "✅ Déploiement terminé avec succès !"
-echo "🌐 L'application est accessible sur http://votre-ip:8000"
+echo "-----------------------------------------------------------"
+echo "✅ DÉPLOIEMENT TERMINÉ AVEC SUCCÈS !"
+echo "🌐 Accès : http://votre-ip-serveur"
+echo "-----------------------------------------------------------"
