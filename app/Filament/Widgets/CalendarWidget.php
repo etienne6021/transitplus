@@ -12,6 +12,12 @@ class CalendarWidget extends FullCalendarWidget
 {
     protected int | string | array $columnSpan = 'full';
 
+    public static function canView(): bool
+    {
+        // On ne l'affiche pas sur le tableau de bord (Dashboard)
+        return ! (request()->routeIs('filament.admin.pages.dashboard'));
+    }
+
     public Model | string | null $model = AgendaItem::class;
 
     public function fetchEvents(array $fetchInfo): array
