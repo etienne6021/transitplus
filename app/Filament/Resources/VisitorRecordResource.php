@@ -41,18 +41,12 @@ class VisitorRecordResource extends Resource
                                     ->placeholder('+228...'),
                             ]),
 
-                        Forms\Components\Grid::make(3)
+                        Forms\Components\Grid::make(2)
                             ->schema([
-                                Forms\Components\Select::make('visited_user_id')
-                                    ->label('Collaborateur à rencontrer')
-                                    ->relationship('visitedUser', 'name')
-                                    ->placeholder('Sélectionner un membre')
-                                    ->searchable()
-                                    ->preload()
-                                    ->required(),
                                 Forms\Components\TextInput::make('person_to_see')
-                                    ->label('Précision (ou autre)')
-                                    ->placeholder('Ex: Bureau 102'),
+                                    ->label('Personne à rencontrer')
+                                    ->placeholder('Nom du collaborateur')
+                                    ->required(),
                                 Forms\Components\TextInput::make('purpose')
                                     ->label('Motif de la visite')
                                     ->placeholder('Ex: Entretien, Livraison, Réunion...')
@@ -84,8 +78,7 @@ class VisitorRecordResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('visitor_name')->label('Visiteur')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('company')->label('Société'),
-                Tables\Columns\TextColumn::make('visitedUser.name')->label('Reçoit')->searchable(),
-                Tables\Columns\TextColumn::make('person_to_see')->label('Précision'),
+                Tables\Columns\TextColumn::make('person_to_see')->label('Reçoit'),
                 Tables\Columns\TextColumn::make('entry_time')->label('Entrée')->dateTime('d/m H:i')->sortable(),
                 Tables\Columns\TextColumn::make('exit_time')
                     ->label('Sortie')

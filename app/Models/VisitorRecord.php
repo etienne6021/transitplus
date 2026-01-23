@@ -15,26 +15,4 @@ class VisitorRecord extends Model
         'entry_time' => 'datetime',
         'exit_time' => 'datetime',
     ];
-
-    protected static function booted()
-    {
-        static::created(function ($visitor) {
-            if ($visitor->visited_user_id) {
-                $recipient = User::find($visitor->visited_user_id);
-                if ($recipient) {
-                    \Filament\Notifications\Notification::make()
-                        ->title('Un visiteur vous attend')
-                        ->body("{$visitor->visitor_name} est arrivé pour vous voir.")
-                        ->icon('heroicon-o-user-group')
-                        ->color('info')
-                        ->sendToDatabase($recipient);
-                }
-            }
-        });
-    }
-
-    public function visitedUser()
-    {
-        return $this->belongsTo(User::class, 'visited_user_id');
-    }
 }
