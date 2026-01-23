@@ -48,6 +48,27 @@ class ClientResource extends Resource
                             ->label('Téléphone')
                             ->tel()
                             ->maxLength(255),
+                    ])->columns(2),
+                
+                Forms\Components\Section::make('Informations Bancaires')
+                    ->description('Détails pour les virements et règlements')
+                    ->collapsed()
+                    ->schema([
+                        Forms\Components\TextInput::make('bank_name')
+                            ->label('Nom de la Banque')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('bank_account_number')
+                            ->label('Numéro de Compte / IBAN')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('bank_swift_bic')
+                            ->label('Code SWIFT / BIC')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('bank_address')
+                            ->label('Adresse de la Banque')
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('bank_rib_details')
+                            ->label('Détails RIB / Autres')
+                            ->columnSpanFull(),
                     ])->columns(2)
             ]);
     }

@@ -19,7 +19,7 @@ class StockAlerts extends BaseWidget
     {
         return $table
             ->query(
-                Product::query()->whereColumn('stock_quantity', '<=', 'min_stock_level')
+                Product::query()->whereColumn('quantity', '<=', 'min_stock')
             )
             ->columns([
                 Tables\Columns\TextColumn::make('name')
@@ -27,16 +27,16 @@ class StockAlerts extends BaseWidget
                     ->weight('bold'),
                 Tables\Columns\TextColumn::make('sku')
                     ->label('Réf'),
-                Tables\Columns\TextColumn::make('stock_quantity')
+                Tables\Columns\TextColumn::make('quantity')
                     ->label('Stock Actuel')
                     ->color('danger')
                     ->weight('bold'),
-                Tables\Columns\TextColumn::make('min_stock_level')
+                Tables\Columns\TextColumn::make('min_stock')
                     ->label('Seuil Alerte'),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Etat')
                     ->badge()
-                    ->state(fn ($record) => $record->stock_quantity <= 0 ? 'Rupture' : 'Bas')
+                    ->state(fn ($record) => $record->quantity <= 0 ? 'Rupture' : 'Bas')
                     ->color(fn ($state) => $state === 'Rupture' ? 'danger' : 'warning'),
             ])
             ->actions([

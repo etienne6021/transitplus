@@ -42,6 +42,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(Agency::class);
     }
 
+    public function agendaItems()
+    {
+        return $this->hasMany(AgendaItem::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

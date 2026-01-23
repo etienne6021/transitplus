@@ -19,27 +19,41 @@ class RolesAndPermissionsSeeder extends Seeder
             'gestion_parametres',
             'gestion_utilisateurs',
             'gestion_agencies',
+            'gestion_agenda_autres',
             
+            // CRM & Business Development
+            'gestion_clients',
+            'gestion_prospects',
+            'gestion_devis',
+
             // Transit & Douane
             'voir_transit',
             'creer_transit',
             'modifier_transit',
             'supprimer_transit',
             
-            // Logistique MAD
+            // Logistique MAD (Magasin et Aire de Dédouanement)
             'gestion_mad',
             
-            // Commerce & Ventes
-            'gestion_ventes',
+            // Commerce, Stock & Ventes
+            'gestion_produits',
             'gestion_stocks',
+            'gestion_ventes',
             
-            // Finance
+            // Finance & Comptabilité
             'gestion_facturation',
+            'gestion_reglements',
             'gestion_tresorerie',
             
-            // RH
+            // RH & Paie
             'gestion_personnel',
             'gestion_paie',
+            'gestion_conges',
+
+            // Secrétariat
+            'gestion_courrier',
+            'gestion_visiteurs',
+            'gestion_notes_service',
         ];
 
         foreach ($permissions as $permission) {
@@ -51,11 +65,14 @@ class RolesAndPermissionsSeeder extends Seeder
         $superAdmin->givePermissionTo(Permission::all());
 
         $admin = Role::findOrCreate('Admin');
-        // L'admin d'une agence n'a pas forcément toutes les permissions système (comme créer d'autres agences)
-        $admin->givePermissionTo([
-            'gestion_parametres', 'gestion_utilisateurs', 'voir_transit', 'creer_transit', 'modifier_transit',
-            'gestion_mad', 'gestion_ventes', 'gestion_stocks', 'gestion_facturation', 'gestion_tresorerie',
-            'gestion_personnel', 'gestion_paie'
+        // L'admin d'une agence a accès à tout sauf la gestion globale des agences
+        $admin->givePermissionTo(Permission::all());
+        $admin->revokePermissionTo('gestion_agencies');
+
+        $secretary = Role::findOrCreate('Secrétaire');
+        $secretary->givePermissionTo([
+            'gestion_courrier', 'gestion_visiteurs', 'gestion_notes_service', 
+            'gestion_agenda_autres', 'voir_transit'
         ]);
 
         $transitAgent = Role::findOrCreate('Agent Transit');
@@ -65,7 +82,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $rh = Role::findOrCreate('Responsable RH');
         $rh->givePermissionTo([
-            'gestion_personnel', 'gestion_paie'
+            'gestion_personnel', 'gestion_paie', 'gestion_conges'
         ]);
 
         $accountant = Role::findOrCreate('Comptable');
@@ -73,10 +90,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'gestion_facturation', 'gestion_tresorerie', 'gestion_ventes'
         ]);
 
-        // Assigner le rôle Admin au premier utilisateur s'il existe
-        $user = \App\Models\User::first();
+        // Assigner le rôle Super Admin au compte principal pour le test
+        $user = \App\Models\User::where('email', 'admin@transit.plus')->first();
         if ($user) {
-            $user->assignRole('Admin');
+            $user->assignRole('Super Admin');
         }
     }
 }
