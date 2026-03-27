@@ -6,6 +6,8 @@ use App\Filament\Resources\MailRecordResource\Pages;
 use App\Models\MailRecord;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -82,9 +84,66 @@ class MailRecordResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make('Détails du Courrier')
+                    ->icon('heroicon-o-envelope')
+                    ->schema([
+                        Infolists\Components\Grid::make(3)
+                            ->schema([
+                                Infolists\Components\TextEntry::make('reference')
+                                    ->label('Référence')
+                                    ->weight('bold')
+                                    ->copyable(),
+                                Infolists\Components\TextEntry::make('type')
+                                    ->badge()
+                                    ->color(fn (string $state): string => preg_match('/Arrivée/', $state) ? 'success' : 'info'),
+                                Infolists\Components\TextEntry::make('date_record')
+                                    ->label('Date d\'enregistrement')
+                                    ->date('d/m/Y'),
+                            ]),
+                        Infolists\Components\TextEntry::make('sender_receiver')
+                            ->label('Expéditeur / Destinataire'),
+                        Infolists\Components\TextEntry::make('subject')
+                            ->label('Objet / Titre'),
+                        Infolists\Components\TextEntry::make('description')
+                            ->label('Résumé')
+                            ->html()
+                            ->columnSpanFull(),
+                        Infolists\Components\TextEntry::make('statut')
+                            ->badge()
+                            ->color(fn (string $state): string => match ($state) {
+                                'Urgent' => 'danger',
+                                'Traité' => 'success',
+                                default => 'warning',
+                            }),
+                    ])->columnSpan(2),
+                
+                Infolists\Components\Section::make('Pièce Jointe / Scan')
+                    ->description('Aperçu du document numérisé')
+                    ->schema([
+                        Infolists\Components\ViewEntry::make('scanned_file')
+                                ->label('')
+                                ->view('filament.resources.mail-record.preview'),
+                        
+                        Infolists\Components\Actions::make([
+                            Infolists\Components\Actions\Action::make('open_file')
+                                ->label('Ouvrir en plein écran')
+                                ->icon('heroicon-o-arrow-top-right-on-square')
+                                ->url(fn (MailRecord $record) => asset('storage/' . $record->scanned_file))
+                                ->openUrlInNewTab()
+                                ->hidden(fn (MailRecord $record) => !$record->scanned_file),
+                        ]),
+                    ])->columnSpan(1),
+            ])->columns(3);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('subject')
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('type')
@@ -105,20 +164,7 @@ class MailRecordResource extends Resource
                 Tables\Filters\SelectFilter::make('type')->options(['Arrivée' => 'Arrivée', 'Départ' => 'Départ']),
             ])
             ->actions([
-                Tables\Actions\Action::make('view_file')
-                    ->label('Voir le scan')
-                    ->icon('heroicon-o-eye')
-                    ->color('info')
-                    ->url(fn (MailRecord $record) => $record->scanned_file ? asset('storage/' . $record->scanned_file) : null)
-                    ->openUrlInNewTab()
-                    ->hidden(fn (MailRecord $record) => !$record->scanned_file),
-                Tables\Actions\Action::make('download_file')
-                    ->label('Télécharger')
-                    ->icon('heroicon-o-arrow-down-tray')
-                    ->color('success')
-                    ->url(fn (MailRecord $record) => $record->scanned_file ? asset('storage/' . $record->scanned_file) : null)
-                    ->openUrlInNewTab()
-                    ->hidden(fn (MailRecord $record) => !$record->scanned_file),
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -132,7 +178,10 @@ class MailRecordResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageMailRecords::route('/'),
+            'index' => Pages\ListMailRecords::route('/'),
+            'create' => Pages\CreateMailRecord::route('/create'),
+            'view' => Pages\ViewMailRecord::route('/{record}'),
+            'edit' => Pages\EditMailRecord::route('/{record}/edit'),
         ];
     }
 }

@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Filament\Resources\MailRecordResource\Pages;
+
+use App\Filament\Resources\MailRecordResource;
+use Filament\Actions;
+use Filament\Resources\Pages\EditRecord;
+
+class EditMailRecord extends EditRecord
+{
+    protected static string $resource = MailRecordResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\ViewAction::make(),
+            Actions\DeleteAction::make(),
+        ];
+    }
+}
