@@ -19,13 +19,13 @@ class EntreeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-archive-box-arrow-down';
 
-    protected static ?string $navigationGroup = 'Logistique MAD';
+    protected static ?string $navigationGroup = 'Transit & Opérations';
 
     protected static ?string $modelLabel = 'Entrée MAD';
 
     protected static ?string $pluralModelLabel = 'Entrées MAD';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

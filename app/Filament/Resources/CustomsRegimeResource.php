@@ -16,13 +16,13 @@ class CustomsRegimeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Régime Douanier';
 
     protected static ?string $pluralModelLabel = 'Régimes Douaniers';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 17;
 
     public static function form(Form $form): Form
     {

@@ -19,7 +19,9 @@ class ActivityResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-finger-print';
 
-    protected static ?string $navigationGroup = 'Paramètres Système';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
+
+    protected static ?int $navigationSort = 23;
 
     protected static ?string $modelLabel = 'Journal d\'Audit';
 

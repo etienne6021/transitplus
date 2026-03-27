@@ -19,13 +19,13 @@ class AgencyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static ?string $navigationGroup = 'Super Administration';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Agence client';
 
     protected static ?string $pluralModelLabel = 'Agences clients';
 
-    protected static ?int $navigationSort = 100;
+    protected static ?int $navigationSort = 22;
 
     public static function form(Form $form): Form
     {

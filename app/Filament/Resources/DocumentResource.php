@@ -19,13 +19,13 @@ class DocumentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 
-    protected static ?string $navigationGroup = 'DocuSync & Rapports';
+    protected static ?string $navigationGroup = 'Secrétariat & Archives';
 
     protected static ?string $modelLabel = 'Archive / Courrier';
 
     protected static ?string $pluralModelLabel = 'Archives & Courriers';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

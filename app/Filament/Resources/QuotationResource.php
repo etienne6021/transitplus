@@ -20,7 +20,7 @@ class QuotationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static ?string $navigationGroup = 'Ventes & Distribution';
+    protected static ?string $navigationGroup = 'Finances & Ventes';
 
     protected static ?string $modelLabel = 'Devis';
 

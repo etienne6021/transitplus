@@ -17,13 +17,13 @@ class AgendaItemResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
-    protected static ?string $navigationGroup = 'Collaboration';
+    protected static ?string $navigationGroup = 'Secrétariat & Archives';
 
     protected static ?string $modelLabel = 'Agenda & Tâches';
 
     protected static ?string $pluralModelLabel = 'Agenda Personnel';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {

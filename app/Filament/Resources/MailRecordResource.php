@@ -14,10 +14,8 @@ class MailRecordResource extends Resource
 {
     protected static ?string $model = MailRecord::class;
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
-    protected static ?string $navigationGroup = 'Secrétariat';
-    protected static ?string $modelLabel = 'Courrier';
-    protected static ?string $pluralModelLabel = 'Gestion du Courrier';
-
+    protected static ?string $navigationGroup = 'Secrétariat & Archives';
+    protected static ?int $navigationSort = 1;
     public static function form(Form $form): Form
     {
         return $form

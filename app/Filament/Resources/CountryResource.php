@@ -16,13 +16,13 @@ class CountryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Pays';
 
     protected static ?string $pluralModelLabel = 'Liste des Pays';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 11;
 
     public static function form(Form $form): Form
     {

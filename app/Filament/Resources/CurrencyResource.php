@@ -16,7 +16,7 @@ class CurrencyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Devise';
 

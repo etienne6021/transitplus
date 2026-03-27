@@ -19,13 +19,13 @@ class ClientResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'CRM & Business Development';
+    protected static ?string $navigationGroup = 'CRM & Clients';
 
     protected static ?string $modelLabel = 'Client / Importateur';
 
     protected static ?string $pluralModelLabel = 'Clients & Importateurs';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

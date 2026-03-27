@@ -16,13 +16,13 @@ class CustomsOfficeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Bureau de Douane';
     
     protected static ?string $pluralModelLabel = 'Bureaux de Douane';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 16;
 
     public static function form(Form $form): Form
     {

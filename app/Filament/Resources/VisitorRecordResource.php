@@ -14,7 +14,8 @@ class VisitorRecordResource extends Resource
 {
     protected static ?string $model = VisitorRecord::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-plus';
-    protected static ?string $navigationGroup = 'Secrétariat';
+    protected static ?string $navigationGroup = 'Secrétariat & Archives';
+    protected static ?int $navigationSort = 2;
     protected static ?string $modelLabel = 'Visiteur';
     protected static ?string $pluralModelLabel = 'Registre des Visiteurs';
 

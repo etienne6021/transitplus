@@ -19,7 +19,7 @@ class DossierResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 
-    protected static ?string $navigationGroup = 'Transit & Douane';
+    protected static ?string $navigationGroup = 'Transit & Opérations';
 
     protected static ?string $modelLabel = 'Dossier de Transit';
 

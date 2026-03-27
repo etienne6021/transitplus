@@ -19,13 +19,13 @@ class InvoiceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 
-    protected static ?string $navigationGroup = 'Trésorerie & Finance';
+    protected static ?string $navigationGroup = 'Finances & Ventes';
 
     protected static ?string $modelLabel = 'Facture Client';
 
     protected static ?string $pluralModelLabel = 'Factures Clients';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

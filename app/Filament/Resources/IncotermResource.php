@@ -16,13 +16,13 @@ class IncotermResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Incoterm';
 
     protected static ?string $pluralModelLabel = 'Incoterms (2020)';
 
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = 13;
 
     public static function form(Form $form): Form
     {

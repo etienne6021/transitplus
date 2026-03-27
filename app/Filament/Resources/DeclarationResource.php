@@ -25,7 +25,7 @@ class DeclarationResource extends Resource
         return $agency && is_array($agency->modules) && in_array('transit', $agency->modules);
     }
 
-    protected static ?string $navigationGroup = 'Transit & Douane';
+    protected static ?string $navigationGroup = 'Transit & Opérations';
 
     protected static ?string $modelLabel = 'Déclaration Sydonia';
 

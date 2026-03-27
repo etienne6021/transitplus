@@ -19,13 +19,13 @@ class FinancialTransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Trésorerie & Finance';
+    protected static ?string $navigationGroup = 'Finances & Ventes';
 
     protected static ?string $modelLabel = 'Écriture Comptable';
 
     protected static ?string $pluralModelLabel = 'Journal de Caisse & Opérations';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

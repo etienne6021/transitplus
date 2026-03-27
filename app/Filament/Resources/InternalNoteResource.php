@@ -14,10 +14,8 @@ class InternalNoteResource extends Resource
 {
     protected static ?string $model = InternalNote::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationGroup = 'Secrétariat';
-    protected static ?string $modelLabel = 'Note de Service';
-    protected static ?string $pluralModelLabel = 'Notes de Service';
-
+    protected static ?string $navigationGroup = 'Secrétariat & Archives';
+    protected static ?int $navigationSort = 3;
     public static function form(Form $form): Form
     {
         return $form

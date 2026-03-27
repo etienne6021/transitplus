@@ -19,7 +19,7 @@ class LeaveResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
-    protected static ?string $navigationGroup = 'Ressources Humaines';
+    protected static ?string $navigationGroup = 'Capital Humain';
 
     protected static ?string $modelLabel = 'Congé';
 

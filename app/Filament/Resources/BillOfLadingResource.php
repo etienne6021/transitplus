@@ -25,13 +25,13 @@ class BillOfLadingResource extends Resource
         return $agency && is_array($agency->modules) && in_array('transit', $agency->modules);
     }
 
-    protected static ?string $navigationGroup = 'Transit & Douane';
+    protected static ?string $navigationGroup = 'Transit & Opérations';
 
     protected static ?string $modelLabel = 'Connaissement (BL)';
 
     protected static ?string $pluralModelLabel = 'Connaissements (BL)';
 
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

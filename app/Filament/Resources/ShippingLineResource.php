@@ -16,13 +16,13 @@ class ShippingLineResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Compagnie Maritime / Armateur';
 
     protected static ?string $pluralModelLabel = 'Compagnies & Armateurs';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 15;
 
     public static function form(Form $form): Form
     {

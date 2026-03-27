@@ -19,7 +19,9 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
 
-    protected static ?string $navigationGroup = 'Paramètres Système';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
+
+    protected static ?int $navigationSort = 21;
 
     protected static ?string $modelLabel = 'Rôle & Droits';
 

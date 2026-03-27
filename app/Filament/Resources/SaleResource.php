@@ -19,7 +19,7 @@ class SaleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
-    protected static ?string $navigationGroup = 'Ventes & Distribution';
+    protected static ?string $navigationGroup = 'Finances & Ventes';
 
     protected static ?string $modelLabel = 'Vente';
 

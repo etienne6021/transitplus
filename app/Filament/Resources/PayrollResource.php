@@ -19,7 +19,7 @@ class PayrollResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Ressources Humaines';
+    protected static ?string $navigationGroup = 'Capital Humain';
 
     protected static ?string $modelLabel = 'Bulletin de Paie';
 

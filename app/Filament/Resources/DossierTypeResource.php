@@ -16,13 +16,13 @@ class DossierTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 
-    protected static ?string $navigationGroup = 'Configuration & Référentiels';
+    protected static ?string $navigationGroup = 'Référentiels & Admin';
 
     protected static ?string $modelLabel = 'Type de Dossier';
 
     protected static ?string $pluralModelLabel = 'Types de Dossiers';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 18;
 
     public static function form(Form $form): Form
     {
