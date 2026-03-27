@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MailRecordResource\Pages;
+use App\Filament\Resources\MailRecordResource\Pages\CreateMailRecord;
+use App\Filament\Resources\MailRecordResource\Pages\EditMailRecord;
+use App\Filament\Resources\MailRecordResource\Pages\ListMailRecords;
+use App\Filament\Resources\MailRecordResource\Pages\ViewMailRecord;
 use App\Models\MailRecord;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -144,6 +147,7 @@ class MailRecordResource extends Resource
     {
         return $table
             ->recordTitleAttribute('subject')
+            ->defaultSort('date_record', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('type')
@@ -178,10 +182,10 @@ class MailRecordResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMailRecords::route('/'),
-            'create' => Pages\CreateMailRecord::route('/create'),
-            'view' => Pages\ViewMailRecord::route('/{record}'),
-            'edit' => Pages\EditMailRecord::route('/{record}/edit'),
+            'index' => ListMailRecords::route('/'),
+            'create' => CreateMailRecord::route('/create'),
+            'view' => ViewMailRecord::route('/{record}'),
+            'edit' => EditMailRecord::route('/{record}/edit'),
         ];
     }
 }
