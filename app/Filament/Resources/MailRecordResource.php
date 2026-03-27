@@ -62,7 +62,7 @@ class MailRecordResource extends Resource
                         Forms\Components\FileUpload::make('scanned_file')
                             ->label('Numérisation (PDF / Scan)')
                             ->directory('mail-scans')
-                            ->image()
+                            ->acceptedFileTypes(['application/pdf', 'image/*'])
                             ->openable()
                             ->downloadable()
                             ->columnSpanFull(),
