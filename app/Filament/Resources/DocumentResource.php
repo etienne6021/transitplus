@@ -21,9 +21,11 @@ class DocumentResource extends Resource
 
     protected static ?string $navigationGroup = 'Secrétariat & Archives';
 
-    protected static ?string $modelLabel = 'Archive / Courrier';
+    protected static ?string $navigationLabel = 'Archives Numériques';
 
-    protected static ?string $pluralModelLabel = 'Archives & Courriers';
+    protected static ?string $modelLabel = 'Archive';
+
+    protected static ?string $pluralModelLabel = 'Archives Numériques';
 
     protected static ?int $navigationSort = 4;
 

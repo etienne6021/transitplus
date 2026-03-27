@@ -15,6 +15,9 @@ class MailRecordResource extends Resource
     protected static ?string $model = MailRecord::class;
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
     protected static ?string $navigationGroup = 'Secrétariat & Archives';
+    protected static ?string $navigationLabel = 'Gestion du Courrier';
+    protected static ?string $modelLabel = 'Courrier';
+    protected static ?string $pluralModelLabel = 'Gestion du Courrier';
     protected static ?int $navigationSort = 1;
     public static function form(Form $form): Form
     {
@@ -102,6 +105,20 @@ class MailRecordResource extends Resource
                 Tables\Filters\SelectFilter::make('type')->options(['Arrivée' => 'Arrivée', 'Départ' => 'Départ']),
             ])
             ->actions([
+                Tables\Actions\Action::make('view_file')
+                    ->label('Voir le scan')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn (MailRecord $record) => $record->scanned_file ? asset('storage/' . $record->scanned_file) : null)
+                    ->openUrlInNewTab()
+                    ->hidden(fn (MailRecord $record) => !$record->scanned_file),
+                Tables\Actions\Action::make('download_file')
+                    ->label('Télécharger')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('success')
+                    ->url(fn (MailRecord $record) => $record->scanned_file ? asset('storage/' . $record->scanned_file) : null)
+                    ->openUrlInNewTab()
+                    ->hidden(fn (MailRecord $record) => !$record->scanned_file),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
