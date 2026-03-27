@@ -32,7 +32,7 @@ class UrgentMailWidget extends BaseWidget
             ->actions([
                 Tables\Actions\Action::make('view')
                     ->label('Détails')
-                    ->url(fn (MailRecord $record): string => \App\Filament\Resources\MailRecordResource::getUrl('index', ['tableSearch' => $record->reference]))
+                    ->url(fn (MailRecord $record): string => \App\Filament\Resources\CourrierResource::getUrl('index', ['tableSearch' => $record->reference]))
                     ->icon('heroicon-o-eye'),
             ]);
     }

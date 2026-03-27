@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MailRecordResource\Pages\CreateMailRecord;
-use App\Filament\Resources\MailRecordResource\Pages\EditMailRecord;
-use App\Filament\Resources\MailRecordResource\Pages\ListMailRecords;
-use App\Filament\Resources\MailRecordResource\Pages\ViewMailRecord;
+use App\Filament\Resources\CourrierResource\Pages\CreateCourrier;
+use App\Filament\Resources\CourrierResource\Pages\EditCourrier;
+use App\Filament\Resources\CourrierResource\Pages\ListCourriers;
+use App\Filament\Resources\CourrierResource\Pages\ViewCourrier;
 use App\Models\MailRecord;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,7 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class MailRecordResource extends Resource
+class CourrierResource extends Resource
 {
     protected static ?string $model = MailRecord::class;
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
@@ -24,6 +24,7 @@ class MailRecordResource extends Resource
     protected static ?string $modelLabel = 'Courrier';
     protected static ?string $pluralModelLabel = 'Gestion du Courrier';
     protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -182,10 +183,10 @@ class MailRecordResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListMailRecords::route('/'),
-            'create' => CreateMailRecord::route('/create'),
-            'view' => ViewMailRecord::route('/{record}'),
-            'edit' => EditMailRecord::route('/{record}/edit'),
+            'index' => ListCourriers::route('/'),
+            'create' => CreateCourrier::route('/create'),
+            'view' => ViewCourrier::route('/{record}'),
+            'edit' => EditCourrier::route('/{record}/edit'),
         ];
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MailRecordResource\Pages;
+namespace App\Filament\Resources\CourrierResource\Pages;
 
-use App\Filament\Resources\MailRecordResource;
+use App\Filament\Resources\CourrierResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditMailRecord extends EditRecord
+class EditCourrier extends EditRecord
 {
-    protected static string $resource = MailRecordResource::class;
+    protected static string $resource = CourrierResource::class;
 
     protected function getHeaderActions(): array
     {
