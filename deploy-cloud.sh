@@ -37,8 +37,8 @@ echo "⚙️  Running Laravel Setup..."
 docker exec btrans-app composer install --no-dev --optimize-autoloader
 docker exec btrans-app php artisan key:generate --force
 docker exec btrans-app php artisan storage:link
-docker exec btrans-app php artisan migrate:fresh --force
-docker exec btrans-app php artisan db:seed --force
+docker exec btrans-app php artisan migrate --force
+# docker exec btrans-app php artisan db:seed --force # Uniquement pour l'initialisation !
 
 # 7. Caching
 docker exec btrans-app php artisan config:cache
